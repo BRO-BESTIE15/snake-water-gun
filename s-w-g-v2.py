@@ -1,89 +1,101 @@
-from random import choice as ch
-# List of possible moves
-l = [1, 2, 3]
+from random import choice
 
-def get_computer_move(l):	     	    
+# List of possible moves
+l = [0, 1, 2]
+
+def get_max_rounds():
+	while True:
+		try:
+			max_rounds = int(input("Enter the max rounds you wanna play: "))
+			return max_rounds
+		except ValueError:
+			print("INVALID INPUT!")
+
+def get_computer_move():	     	    
 	     """Returns a random move from the list of possible moves."""
-	     return ch(l)
+	     return choice(l)
    
    
-pscore=0  # Player score
-cscore =0  # Computer score
-move = {1 : 'Snake', 2 : 'Water', 3 : 'Gun'}
+player_score = 0  # Player score
+computer_score = 0  # Computer score
+
+move = {0 : 'Snake', 1 : 'Water', 2 : 'Gun'}
+
 # 2d List for storing results 
-table = [
+result_table = [
   ['D','W','L'],
   ['L','D','W'],
   ['W','L','D']
 ]
+
 # dictionary for Mapping the results
 result_map = { 'W': "You win", 'L': "You lose", 'D': "It's a draw" }
 
-def get_result(player, computer):
-	    """Make the result of a round based on player's and computer's moves. 
-	    """
-	    # converting user input and random into strings 
-	    player_index = player - 1
-	    computer_index = computer - 1
-	    #Getting results from 2d list
-	    r = table[player_index][computer_index]
+
+
+
+	    
+def get_result_msg(result):
+		    
 	    
 	    # Mapping the results 
-	    message = result_map[r]
+	    message = result_map[result]
 	    return message
-	    
-
-def get_player_input():
+	
+	
+def get_player_move():
 	"""This function takes player input"""
 	while True:
 		try:
-			pmove = int(input("\n 1. Snake\n 2. Water\n 3. Gun\n Choose Your Move:\n 1 or 2 or 3\n"))
+			player_move = int(input("\n 0. Snake\n 1. Water\n 2. Gun\n Choose Your Move:\n 0 or 1 or 2\n"))
 			
-			if pmove not in [1, 2, 3]:
+			if player_move not in [0, 1, 2]:
 			     raise ValueError
 			     
-			return pmove   # ✅ only valid input returns
+			return player_move   # ✅ only valid input returns
 			
 		except ValueError:
-		      	print("Invalid input,\n enter a number between 1, 2 or 3\n\n TRY AGAIN!")
+		      	print("Invalid input,\n enter a number between 0, 1 or 2 \n\n TRY AGAIN!")
 
-nround = 0
-while True:
+def update_score(result):
+    global player_score, computer_score
+
+    match result:
+        case "W":
+            player_score += 1
+        case "L":
+            computer_score += 1
+
+def final_result():
+	print("FINAL RESULT:")
+	if (player_score == computer_score):
+		print('ITS A DRAW')
+	elif (player_score > computer_score):
+		print('YOU WIN')
+	elif(player_score < computer_score):
+		print('YOU LOSE')
+
+def game():
+	rounds = 0
+	max_rounds=get_max_rounds()
+	while True:
+		player_move = get_player_move()
+		computer_move = get_computer_move() 
+		print('-'*20)
+		print(f'Your move is {move[player_move]} \nComputer move is {move[computer_move]}')
+		result = result_table[player_move][computer_move]
+		print(get_result_msg(result))
+		update_score(result)
+		rounds += 1
+		print('-'*20)
 		
-		#Get palyer's move
-		x1 = get_player_input()
-		
-		
-		# Get computer's move		
-		x2 = get_computer_move(l)
-		
-	
-	
-		print(f' \nYour move is {move[x1]} \nComputer move is {move[x2]}')
-		# Determine result of round
-		x = get_result(x1, x2)
-		print(x)
-		# Update scores
-		if x == "You win":
-				pscore += 1
-		elif x == "You lose":
-				cscore += 1
-		nround += 1
-		
-		# Check if game is over
-		if nround >= 5:
+		if rounds >= max_rounds:
 			break
-			
-	
+	final_result()
 		
 	
-#
-# Print final scores and result		
-print(f"\n \n \nThe player score is {pscore} \nAnd \nThe computer score is {cscore}")
+	
+	
+game()
 
-if (pscore == cscore):
-	print('ITS A DRAW')
-elif (pscore > cscore):
-	print('YOU WIN')
-elif(pscore < cscore):
-	print('YOU LOSE')
+
