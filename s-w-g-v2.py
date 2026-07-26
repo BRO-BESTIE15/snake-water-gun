@@ -1,55 +1,55 @@
 from random import choice
 
 # List of possible moves
-l = [0, 1, 2]
+MOVES = (0, 1, 2)
 
-def get_max_rounds():
-	while True:
-		try:
-			max_rounds = int(input("Enter the max rounds you wanna play: "))
-			return max_rounds
-		except ValueError:
-			print("INVALID INPUT!")
-
-def get_computer_move():	     	    
-	     """Returns a random move from the list of possible moves."""
-	     return choice(l)
-   
-   
-player_score = 0  # Player score
-computer_score = 0  # Computer score
-
-move = {0 : 'Snake', 1 : 'Water', 2 : 'Gun'}
+MOVE_MAP = {0 : 'Snake', 1 : 'Water', 2 : 'Gun'}
 
 # 2d List for storing results 
-result_table = [
+RESULT_TABLE = [
   ['D','W','L'],
   ['L','D','W'],
   ['W','L','D']
 ]
 
 # dictionary for Mapping the results
-result_map = { 'W': "You win", 'L': "You lose", 'D': "It's a draw" }
+RESULT_MAP = { 'W': "You win", 'L': "You lose", 'D': "It's a draw" }
+
+
+def get_max_rounds():
+	'''This func take the max rounds form player with error robustness'''
+	while True:
+		try:
+			max_rounds = int(input("Enter the max rounds you wanna play: "))
+			if max_rounds <= 0:
+				raise ValueError 
+			return max_rounds
+		except ValueError:
+			print("INVALID INPUT!")
+
+def get_computer_move():	     	    
+	     """Returns a random move from the list of possible moves."""
+	     return choice(MOVES)
+   
+   
+
 
 
 
 
 	    
 def get_result_msg(result):
-		    
-	    
-	    # Mapping the results 
-	    message = result_map[result]
-	    return message
+    '''this func map the result with dict and return message'''
+    return RESULT_MAP[result]
 	
 	
 def get_player_move():
-	"""This function takes player input"""
+	"""This function takes player input with error robustness"""
 	while True:
 		try:
-			player_move = int(input("\n 0. Snake\n 1. Water\n 2. Gun\n Choose Your Move:\n 0 or 1 or 2\n"))
+			player_move = int(input("\n0. Snake \n1. Water \n2. Gun \nChoose Your Move: \n0 or 1 or 2\n"))
 			
-			if player_move not in [0, 1, 2]:
+			if player_move not in MOVES:
 			     raise ValueError
 			     
 			return player_move   # ✅ only valid input returns
@@ -57,45 +57,54 @@ def get_player_move():
 		except ValueError:
 		      	print("Invalid input,\n enter a number between 0, 1 or 2 \n\n TRY AGAIN!")
 
-def update_score(result):
-    global player_score, computer_score
-
+def update_score(player_score, computer_score, result):
+    """this func updates score using local variable and tuple unpacking"""
     match result:
         case "W":
             player_score += 1
         case "L":
             computer_score += 1
+            
+    return player_score , computer_score
+    
+    
+def final_score(player_score, computer_score):
+	"""this func return final score as f-string"""
+	return f"Player: {player_score} \nComputer: {computer_score}"
 
-def final_result():
-	print("FINAL RESULT:")
+def final_result(player_score, computer_score):
+	'''this func return final result'''
 	if (player_score == computer_score):
-		print('ITS A DRAW')
+		return 'FINAL RESULT: \nITS A DRAW'
 	elif (player_score > computer_score):
-		print('YOU WIN')
+		return 'FINAL RESULT: \nYOU WIN'
 	elif(player_score < computer_score):
-		print('YOU LOSE')
+		return 'FINAL RESULT: \nYOU LOSE'
+
+
 
 def game():
+	'''run main game'''
+	player_score=0 
+	computer_score=0
 	rounds = 0
 	max_rounds=get_max_rounds()
-	while True:
+	while rounds < max_rounds:
 		player_move = get_player_move()
 		computer_move = get_computer_move() 
 		print('-'*20)
-		print(f'Your move is {move[player_move]} \nComputer move is {move[computer_move]}')
-		result = result_table[player_move][computer_move]
+		print(f'Your move is {MOVE_MAP[player_move]} \nComputer move is {MOVE_MAP[computer_move]}')
+		result = RESULT_TABLE[player_move][computer_move]
 		print(get_result_msg(result))
-		update_score(result)
+		player_score, computer_score = update_score(player_score, computer_score, result)
 		rounds += 1
 		print('-'*20)
 		
-		if rounds >= max_rounds:
-			break
-	final_result()
+	# End of loop
+			
+	print(final_score(player_score, computer_score))
+	print(final_result(player_score, computer_score))
+	
+if __name__ == "__main__":
+		game()				
 		
-	
-	
-	
-game()
-
-
