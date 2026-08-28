@@ -14,7 +14,11 @@ class Colour:
 
 
 # 2d List for storing results
-RESULT_TABLE = [["D", "W", "L"], ["L", "D", "W"], ["W", "L", "D"]]
+RESULT_TABLE = [
+["D", "W", "L"], 
+["L", "D", "W"], 
+["W", "L", "D"]
+]
 
 # dictionary for mapping the results (coloured)
 RESULT_MAP = {
@@ -116,7 +120,30 @@ def game():
 
     print(final_score(player_score, computer_score))
     print(final_result(player_score, computer_score))
+    
+    return player_score, computer_score
 
+def get_again():
+    while True:
+        try:
+            again = input("Another game? (y/n)").strip().lower()
+            if again not in ["y", "n"]:
+                raise ValueError   
+            return again
+        except ValueError:
+            print("INVALID INPUT!")
+        
+
+
+def main():
+    while True:
+        game()
+        again = get_again()
+        if again != "y":
+            break
+        
+
+        
 
 if __name__ == "__main__":
-    game()
+    main()
