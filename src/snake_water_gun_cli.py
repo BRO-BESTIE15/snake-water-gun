@@ -69,20 +69,27 @@ def get_player_move():
             print("Invalid input,\n enter a number between 0, 1 or 2 \n\n TRY AGAIN!")
 
 
-def update_score(player_score, computer_score, result):
+def update_score(player_score, computer_score, draws, result):
     """this func updates score using local variable and tuple unpacking"""
     match result:
         case "W":
             player_score += 1
         case "L":
             computer_score += 1
+        case "D":
+            draws += 1
+            
 
-    return player_score, computer_score
+    return player_score, computer_score, draws
 
 
-def final_score(player_score, computer_score):
+def calculate_win_percentage(player_score, max_rounds):
+    return (player_score / max_rounds) * 100
+    
+    
+def final_score(player_score, computer_score, draws):
     """this func return final score as f-string"""
-    return f"Player: {player_score} \nComputer: {computer_score}"
+    return f"\nPlayer: {player_score} \nComputer: {computer_score} \nDraws: {draws}"
 
 
 def final_result(player_score, computer_score):
@@ -99,6 +106,7 @@ def game():
     """run main game"""
     player_score = 0
     computer_score = 0
+    draws = 0
     rounds = 0
     max_rounds = get_max_rounds()
     while rounds < max_rounds:
@@ -110,18 +118,23 @@ def game():
         )
         result = RESULT_TABLE[player_move][computer_move]
         print(get_result_msg(result))
-        player_score, computer_score = update_score(
-            player_score, computer_score, result
+        player_score, computer_score, draws = update_score(
+            player_score, computer_score, draws, result
         )
         rounds += 1
         print("-" * 20)
 
     # End of loop
-
-    print(final_score(player_score, computer_score))
-    print(final_result(player_score, computer_score))
+    win_percentage = calculate_win_percentage(player_score, max_rounds)
+    score_final = final_score(player_score, computer_score, draws)
+    result_final = final_result(player_score, computer_score)
     
-    return player_score, computer_score
+    print(score_final)
+    print(f"Win % : {win_percentage:.2f}")
+    print(result_final)
+    
+    return player_score, computer_score, draws
+
 
 def get_again():
     while True:
@@ -133,7 +146,6 @@ def get_again():
         except ValueError:
             print("INVALID INPUT!")
         
-
 
 def main():
     while True:
