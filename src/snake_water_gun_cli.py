@@ -11,6 +11,7 @@ class Colour:
     RED = "\033[91m"  # lose
     YELLOW = "\033[93m"  # draw
     RESET = "\033[0m"
+    CYAN = "\033[96m" 
 
 
 # 2d List for storing results
@@ -32,7 +33,7 @@ def get_max_rounds():
     """This func take the max rounds form player with error robustness"""
     while True:
         try:
-            max_rounds = int(input("Enter the max rounds you wanna play: "))
+            max_rounds = int(input("How many rounds would you like to play? "))
             if max_rounds <= 0:
                 raise ValueError
             return max_rounds
@@ -51,22 +52,19 @@ def get_result_msg(result):
 
 
 def get_player_move():
-    """This function takes player input with error robustness"""
     while True:
         try:
-            player_move = int(
-                input(
-                    "\n0. Snake \n1. Water \n2. Gun \nChoose Your Move: \n0 or 1 or 2\n"
-                )
-            )
+            print(f" {Colour.CYAN}\tChoose your move:{Colour.RESET}\n \t0 → 🐍 Snake\n \t1 → 💧 Water\n \t2 → 🔫 Gun")
+
+            player_move = int(input("Your choice: "))
 
             if player_move not in MOVES:
                 raise ValueError
 
-            return player_move  # ✅ only valid input returns
+            return player_move
 
         except ValueError:
-            print("Invalid input,\n enter a number between 0, 1 or 2 \n\n TRY AGAIN!")
+            print(f"{Colour.RED}❌ Please enter 0, 1, or 2.{Colour.RESET}")
 
 
 def update_score(player_score, computer_score, draws, result):
@@ -89,7 +87,11 @@ def calculate_win_percentage(player_score, max_rounds):
     
 def final_score(player_score, computer_score, draws):
     """this func return final score as f-string"""
-    return f"\nPlayer: {player_score} \nComputer: {computer_score} \nDraws: {draws}"
+    return (
+        f"{Colour.CYAN}Player: {player_score}{Colour.RESET} \n"
+        f"{Colour.RED}Computer: {computer_score}{Colour.RESET} \n"
+        f"{Colour.YELLOW}Draws: {draws}{Colour.RESET}"
+    )
 
 
 def final_result(player_score, computer_score):
@@ -102,6 +104,14 @@ def final_result(player_score, computer_score):
         return f"FINAL RESULT: \n{Colour.RED}YOU LOSE{Colour.RESET}"
 
 
+def show_title():
+    print(f"{Colour.CYAN} \n|| 🐍 SNAKE WATER GUN 🔫 ||  \n{Colour.RESET}")
+
+
+def separator():
+    print(f"{Colour.CYAN}{'═' * 35}{Colour.RESET}")
+    
+    
 def game():
     """run main game"""
     player_score = 0
@@ -110,9 +120,11 @@ def game():
     rounds = 0
     max_rounds = get_max_rounds()
     while rounds < max_rounds:
+        print(f"\n{Colour.CYAN}══════════ ROUND {rounds + 1} ══════════{Colour.RESET}")
         player_move = get_player_move()
         computer_move = get_computer_move()
-        print("-" * 20)
+        separator()
+        
         print(
             f"Your move is {MOVE_MAP[player_move]} \nComputer move is {MOVE_MAP[computer_move]}"
         )
@@ -121,16 +133,22 @@ def game():
         player_score, computer_score, draws = update_score(
             player_score, computer_score, draws, result
         )
+        print(
+    f"\nScore → You: {player_score} | "
+    f"Computer: {computer_score} | "
+    f"Draws: {draws}"
+)
         rounds += 1
-        print("-" * 20)
+        separator()
 
     # End of loop
     win_percentage = calculate_win_percentage(player_score, max_rounds)
     score_final = final_score(player_score, computer_score, draws)
     result_final = final_result(player_score, computer_score)
     
+    print(f"Win % :{Colour.CYAN} {win_percentage:.2f} {Colour.RESET}")
     print(score_final)
-    print(f"Win % : {win_percentage:.2f}")
+    separator()
     print(result_final)
     
     return player_score, computer_score, draws
@@ -140,7 +158,7 @@ def get_again():
     while True:
         try:
             again = input("Another game? (y/n)").strip().lower()
-            if again not in ["y", "n"]:
+            if again not in ("y", "n"):
                 raise ValueError   
             return again
         except ValueError:
@@ -148,10 +166,12 @@ def get_again():
         
 
 def main():
+    show_title()
     while True:
         game()
         again = get_again()
         if again != "y":
+            print("\nThanks for playing! 👋")
             break
         
 
