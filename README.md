@@ -7,28 +7,31 @@
 
 A simple **Snake 🐍, Water 💧, Gun 🔫** game made in Python.
 
-📄 **Source Code:** [`s-w-g-v2.py`](s-w-g-v2.py)
+📄 **Source Code:** `src/snake_water_gun_cli.py`
 
-Play **Snake, Water, Gun** against the computer! Before the game starts, you can choose how many rounds you want to play. The computer randomly selects its moves, and the winner of each round is decided using a lookup table. At the end, the final scores are compared to declare the overall winner.
+Play **Snake, Water, Gun** against the computer! Before the game starts, you can choose how many rounds you want to play. The computer randomly selects its moves, and the winner of each round is determined by a lookup table.
 
 ## ✨ Features
 
-- 🎲 Random computer moves
+- 🎲 Random computer moves using Python's `random.choice()`
 - 🎮 User-configurable number of rounds
-- ✅ Input validation
-- 📊 Live score tracking
-- 🏆 Final winner announcement
-- 🧠 Lookup table-based game logic
+- ✅ Robust input validation with clear error messages
+- 📊 Live score tracking (player, computer, draws)
+- 🧾 Final statistics: win percentage and final winner announcement
+- 🧠 Lookup table-based game logic (fast, easy to reason about)
+- 🎨 ANSI-coloured terminal output for clearer win/lose/draw messages
+- 🔁 "Play again" prompt to repeat games without restarting the program
+- 🧩 Small, single-file CLI (easy to read and extend)
 
 ## 🚀 How to Run
 
-1. Make sure Python is installed.
-2. Clone or download this repository.
-3. Run the program:
+From a fresh clone, run:
 
 ```bash
-python s-w-g-v2.py
+python src/snake_water_gun_cli.py
 ```
+
+Requires Python 3.x. No external dependencies. A terminal that supports ANSI escape codes is recommended for the coloured output.
 
 ## 🎮 Controls
 
@@ -40,49 +43,105 @@ python s-w-g-v2.py
 
 First, enter the number of rounds you want to play. Then, enter the number corresponding to your move when prompted.
 
-## 📷 Example
+## 📷 Example run
 
-```text
-Enter the max rounds you wanna play: 2
+```
+|| 🐍 SNAKE WATER GUN 🔫 ||
 
- 0. Snake
- 1. Water
- 2. Gun
- Choose Your Move:
- 0 or 1 or 2
-1
---------------------
+How many rounds would you like to play? 5
+
+══════════ ROUND 1 ══════════
+        Choose your move:
+        0 → 🐍 Snake
+        1 → 💧 Water
+        2 → 🔫 Gun
+Your choice: 1
+═══════════════════════════════════
 Your move is Water
 Computer move is Water
 It's a draw
---------------------
 
- 0. Snake
- 1. Water
- 2. Gun
- Choose Your Move:
- 0 or 1 or 2
-0
---------------------
+Score → You: 0 | Computer: 0 | Draws: 1
+═══════════════════════════════════
+
+══════════ ROUND 2 ══════════
+        Choose your move:
+        0 → 🐍 Snake
+        1 → 💧 Water
+        2 → 🔫 Gun
+Your choice: 0
+═══════════════════════════════════
 Your move is Snake
 Computer move is Snake
 It's a draw
---------------------
-FINAL RESULT:
-ITS A DRAW
 
+Score → You: 0 | Computer: 0 | Draws: 2
+═══════════════════════════════════
+
+══════════ ROUND 3 ══════════
+        Choose your move:
+        0 → 🐍 Snake
+        1 → 💧 Water
+        2 → 🔫 Gun
+Your choice: 2
+═══════════════════════════════════
+Your move is Gun
+Computer move is Snake
+You win
+
+Score → You: 1 | Computer: 0 | Draws: 2
+═══════════════════════════════════
+
+══════════ ROUND 4 ══════════
+        Choose your move:
+        0 → 🐍 Snake
+        1 → 💧 Water
+        2 → 🔫 Gun
+Your choice: 1
+═══════════════════════════════════
+Your move is Water
+Computer move is Water
+It's a draw
+
+Score → You: 1 | Computer: 0 | Draws: 3
+═══════════════════════════════════
+
+══════════ ROUND 5 ══════════
+        Choose your move:
+        0 → 🐍 Snake
+        1 → 💧 Water
+        2 → 🔫 Gun
+Your choice: 0
+═══════════════════════════════════
+Your move is Snake
+Computer move is Water
+You win
+
+Score → You: 2 | Computer: 0 | Draws: 3
+═══════════════════════════════════
+Win % : 40.00
+Player: 2
+Computer: 0
+Draws: 3
+═══════════════════════════════════
+FINAL RESULT:
+YOU WIN
+Another game? (y/n) N
+
+Thanks for playing! 👋
+
+[Program finished]
 ```
 
 ## 📚 Concepts Used
 
 - Functions
-- Lists
-- 2D Lists (Lookup Table)
+- Lists and 2D lists (lookup table)
 - Dictionaries
 - `random.choice()`
-- Loops
-- Input Validation (`try`/`except`)
-- Variables and Score Keeping
+- Loops and control flow
+- Input validation (`try`/`except`)
+- Terminal colouring via ANSI escape codes
 
 ## 📜 Rules
 
