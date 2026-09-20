@@ -1,17 +1,17 @@
 # 🐍 Snake Water Gun Game
 ![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
+![Status](https://img.shields.io/badge/Status-Active%20Development-blue)
 ![Beginner](https://img.shields.io/badge/Level-Beginner-orange)
 ![Platform](https://img.shields.io/badge/Platform-CLI-lightgrey)
 
 A simple **Snake 🐍, Water 💧, Gun 🔫** game made in Python.
 
-📄 **Source Code:** `src/snake_water_gun_cli.py`
+📄 **Source Code:** `src/cli.py` and `src/engine.py`
 
-Play **Snake, Water, Gun** against the computer! Before the game starts, you can choose how many rounds you want to play. The computer randomly selects its moves, and the winner of each round is determined by a lookup table.
+Play **Snake, Water, Gun** against the computer! Before the game starts, you can choose how many rounds you want to play. The computer randomly selects its moves, and the winner of each round is determined by the classic rules.
 
-## ✨ Features
+## ✨ Current Features (MVP)
 
 - 🎲 Random computer moves using Python's `random.choice()`
 - 🎮 User-configurable number of rounds
@@ -21,14 +21,14 @@ Play **Snake, Water, Gun** against the computer! Before the game starts, you can
 - 🧠 Lookup table-based game logic (fast, easy to reason about)
 - 🎨 ANSI-coloured terminal output for clearer win/lose/draw messages
 - 🔁 "Play again" prompt to repeat games without restarting the program
-- 🧩 Small, single-file CLI (easy to read and extend)
+- 🧩 Modular structure with separate `cli.py` and `engine.py` modules (easy to read and extend)
 
 ## 🚀 How to Run
 
 From a fresh clone, run:
 
 ```bash
-python src/snake_water_gun_cli.py
+python src/cli.py
 ```
 
 Requires Python 3.x. No external dependencies. A terminal that supports ANSI escape codes is recommended for the coloured output.
@@ -142,6 +142,7 @@ Thanks for playing! 👋
 - Loops and control flow
 - Input validation (`try`/`except`)
 - Terminal colouring via ANSI escape codes
+- Modular code organization
 
 ## 📜 Rules
 
@@ -149,6 +150,26 @@ Thanks for playing! 👋
 - Water 💧 douses Gun 🔫
 - Gun 🔫 kills Snake 🐍
 - Same moves result in a Draw 🤝
+
+## 📁 Project Structure
+
+```
+src/
+├── cli.py       # User interface and game loop
+└── engine.py    # Game logic and result calculations
+```
+
+## 🗺️ Roadmap
+
+The following features are planned for future releases:
+
+| Issue | Feature | Status |
+|-------|---------|--------|
+| [#4](https://github.com/BRO-BESTIE15/snake-water-gun/issues/4) | Persistent game statistics using JSON | Open |
+| [#5](https://github.com/BRO-BESTIE15/snake-water-gun/issues/5) | Main menu and match history | Open |
+| [#6](https://github.com/BRO-BESTIE15/snake-water-gun/issues/6) | Game settings (preferences file) | Open |
+| [#7](https://github.com/BRO-BESTIE15/snake-water-gun/issues/7) | Pygame graphical version | Open |
+| [#8](https://github.com/BRO-BESTIE15/snake-water-gun/issues/8) | Add timed delays for improved UX | Open |
 
 ## 📄 License
 
