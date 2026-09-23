@@ -19,7 +19,7 @@ Play **Snake, Water, Gun** against the computer! Before the game starts, you can
 - 🎮 User-configurable number of rounds
 - ✅ Robust input validation with clear error messages
 - 📊 Live score tracking (player, computer, draws)
-- 🧾 Final statistics: win percentage and final winner announcement
+- 🧾 Final statistics: round win percentage and final winner announcement
 - 🧠 Lookup table-based game logic (fast, easy to reason about)
 - 🎨 ANSI-coloured terminal output for clearer win/lose/draw messages
 - 🔁 "Play again" prompt to repeat games without restarting the program
@@ -164,12 +164,13 @@ Thanks for playing! 👋
 ## 📁 Project Structure
 
 ```
-src/
-├── cli.py        # User interface and game loop
-├── engine.py     # Game logic and result calculations
-├── snake-water-gun.spec  # Optional PyInstaller packaging config
-└── archive/      # Legacy single-file prototype retained for reference
-    └── snake_water_gun_cli.py
+./
+├── src/
+│   ├── cli.py        # User interface and game loop
+│   ├── engine.py     # Game logic and result calculations
+│   └── snake-water-gun.spec  # Optional PyInstaller packaging config
+└── archive/
+    └── snake_water_gun_cli.py  # Legacy single-file prototype retained for reference
 ```
 
 ## 🗺️ Roadmap
