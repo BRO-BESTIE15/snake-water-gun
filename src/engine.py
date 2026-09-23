@@ -38,7 +38,8 @@ def update_score(player_score, computer_score, draws, result):
     return player_score, computer_score, draws
 
 
-def calculate_win_percentage(player_score, max_rounds):
+def calculate_round_win_percentage(player_score, max_rounds):
+    """Return the percentage of rounds won by the player."""
     return (player_score / max_rounds) * 100
 
 

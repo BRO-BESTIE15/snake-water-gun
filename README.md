@@ -129,7 +129,7 @@ You win
 
 Score → You: 2 | Computer: 0 | Draws: 3
 ══════════════════════════════════
-Win % : 40.00
+Round win % : 40.00
 Player: 2
 Computer: 0
 Draws: 3
