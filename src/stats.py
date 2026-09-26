@@ -26,14 +26,26 @@ def load_json():
         data = json.load(f)
     return data
 
-def load_stats():
-    if path.exists():
-        return load_json()
-    else:
-        return default_stats()
-        
 
+def validate_stats(stats, expected):
+    if stats.keys() != expected.keys():
+        return False
 
+    for key in expected:
+        expected_value = expected[key]
+        actual_value = stats[key]
+
+        if isinstance(expected_value, dict):
+            if not isinstance(actual_value, dict):
+                return False
+
+            if not validate_stats(actual_value, expected_value):
+                return False
+
+    return True
+    
+    
+    
 def default_stats():
     stats = copy.deepcopy(DEFAULT)
 
@@ -41,6 +53,19 @@ def default_stats():
         json.dump(stats, f, indent=4, ensure_ascii=False)
 
     return stats
+
+
+def load_stats():
+    if not path.exists():
+        return default_stats()
+
+    stats = load_json()
+
+    if validate_stats(stats, default):
+        return stats
+
+    return default_stats()
+        
 
 def save_stats(stats):
     with open(FILE, "w", encoding="utf-8") as f:
