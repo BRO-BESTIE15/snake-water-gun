@@ -1,5 +1,6 @@
 import engine
-
+import stats
+from datetime import datetime
 
 # ANSI colour codes
 class Colour:
@@ -120,7 +121,16 @@ def game():
     separator()
     print(display_final_result(result_final))
 
-    return player_score, computer_score, draws
+    match_stats = {
+        "timestamp": datetime.now().isoformat(),
+        "rounds_requested": max_rounds,
+        "rounds_won": player_score,
+        "rounds_lost": computer_score,
+        "rounds_draw": draws,
+        "result": result_final
+    }
+    
+    return match_stats, result_final
 
 
 def get_again():
@@ -133,11 +143,18 @@ def get_again():
         except ValueError:
             print("INVALID INPUT!")
 
+def record_match(match_stats, result):
+    separator()
+    print("Saving Stats...")
+    stats.save_update_stats(match_stats, result)
+    print('Stats saved ✅ ')
+
 
 def main():
     show_title()
     while True:
-        game()
+        match_stats, result = game()
+        record_match(match_stats, result)
         again = get_again()
         if again != "y":
             print("\nThanks for playing! 👋")

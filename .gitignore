@@ -27,3 +27,7 @@ Thumbs.db
 
 # Environment variables
 .env
+
+
+# Game stats 
+stats.json
