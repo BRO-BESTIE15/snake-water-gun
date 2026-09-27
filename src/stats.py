@@ -27,8 +27,16 @@ def load_json(path):
     return data
 
 
+<<<<<<< HEAD
 def validate_stats(actual, expected):
     if actual.keys() != expected.keys():
+=======
+def validate_stats(stats, expected):
+    if not isinstance(stats, dict):
+        return False
+
+    if stats.keys() != expected.keys():
+>>>>>>> c3fb535d78f9c6040de0c35c74737520f5a67c3c
         return False
 
     for key in expected:
@@ -41,6 +49,14 @@ def validate_stats(actual, expected):
 
             if not validate_stats(actual_value, expected_value):
                 return False
+        elif type(expected_value) is int:
+            if type(actual_value) is not int:
+                return False
+        elif expected_value is None:
+            if actual_value is not None and not isinstance(actual_value, str):
+                return False
+        elif type(actual_value) is not type(expected_value):
+            return False
 
     return True
     
@@ -59,7 +75,14 @@ def load_stats():
     if not path.exists():
         return default_stats(DEFAULT, FILE)
 
+<<<<<<< HEAD
     stats = load_json(path)
+=======
+    try:
+        stats = load_json()
+    except (json.JSONDecodeError, UnicodeDecodeError):
+        return default_stats()
+>>>>>>> c3fb535d78f9c6040de0c35c74737520f5a67c3c
 
     if validate_stats(stats, DEFAULT):
         return stats

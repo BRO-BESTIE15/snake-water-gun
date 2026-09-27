@@ -7,9 +7,9 @@
 
 A simple **Snake 🐍, Water 💧, Gun 🔫** game made in Python.
 
-📄 **Source Code:** `src/cli.py` and `src/engine.py`
+📄 **Source Code:** `src/cli.py`, `src/engine.py`, and `src/stats.py`
 
-> `archive/snake_water_gun_cli.py` is a legacy single-file prototype kept for reference. The active project uses the modular `cli.py` + `engine.py` structure.
+> `archive/snake_water_gun_cli.py` is a legacy single-file prototype kept for reference. The active project uses separate `cli.py`, `engine.py`, and `stats.py` modules.
 
 Play **Snake, Water, Gun** against the computer! Before the game starts, you can choose how many rounds you want to play. The computer randomly selects its moves, and the winner of each round is determined by the game rules. The project tracks score across rounds and shows the final winner at the end.
 
@@ -23,7 +23,8 @@ Play **Snake, Water, Gun** against the computer! Before the game starts, you can
 - 🧠 Lookup table-based game logic (fast, easy to reason about)
 - 🎨 ANSI-coloured terminal output for clearer win/lose/draw messages
 - 🔁 "Play again" prompt to repeat games without restarting the program
-- 🧩 Modular structure with separate `cli.py` and `engine.py` modules (easy to read and extend)
+- 💾 Persistent game statistics saved in `stats.json`
+- 🧩 Separate `cli.py`, `engine.py`, and `stats.py` modules
 
 ## 🚀 How to Run
 
@@ -168,7 +169,9 @@ Thanks for playing! 👋
 ├── src/
 │   ├── cli.py        # User interface and game loop
 │   ├── engine.py     # Game logic and result calculations
+│   ├── stats.py      # Persistent game statistics using JSON
 │   └── snake-water-gun.spec  # Optional PyInstaller packaging config
+├── stats.json        # Created at runtime to store game statistics
 └── archive/
     └── snake_water_gun_cli.py  # Legacy single-file prototype retained for reference
 ```
