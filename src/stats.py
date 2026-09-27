@@ -21,19 +21,19 @@ FILE = "stats.json"
 path = Path(FILE)
 
 
-def load_json():
+def load_json(path):
     with open(path, "r", encoding="utf-8") as f:
         data = json.load(f)
     return data
 
 
-def validate_stats(stats, expected):
-    if stats.keys() != expected.keys():
+def validate_stats(actual, expected):
+    if actual.keys() != expected.keys():
         return False
 
     for key in expected:
         expected_value = expected[key]
-        actual_value = stats[key]
+        actual_value = actual[key]
 
         if isinstance(expected_value, dict):
             if not isinstance(actual_value, dict):
@@ -46,7 +46,7 @@ def validate_stats(stats, expected):
     
     
     
-def default_stats():
+def default_json(DEFAULT, FILE):
     stats = copy.deepcopy(DEFAULT)
 
     with open(FILE, "w", encoding="utf-8") as f:
@@ -57,11 +57,11 @@ def default_stats():
 
 def load_stats():
     if not path.exists():
-        return default_stats()
+        return default_stats(DEFAULT, FILE)
 
-    stats = load_json()
+    stats = load_json(path)
 
-    if validate_stats(stats, default):
+    if validate_stats(stats, DEFAULT):
         return stats
 
     return default_stats()
