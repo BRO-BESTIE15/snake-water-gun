@@ -11,7 +11,7 @@ A simple **Snake 🐍, Water 💧, Gun 🔫** game made in Python.
 
 > `archive/snake_water_gun_cli.py` is a legacy single-file prototype kept for reference. The active project uses separate `cli.py`, `engine.py`, and `stats.py` modules.
 
-Play **Snake, Water, Gun** against the computer! Before the game starts, you can choose how many rounds you want to play. The computer randomly selects its moves, and the winner of each round is determined by the game rules. The project tracks score across rounds and shows the final winner at the end.
+Play **Snake, Water, Gun** against the computer! Before the game starts, you can choose how many rounds you want to play. The computer randomly selects its moves, and the winner of each round is d[...]
 
 ## ✨ Current Features (MVP)
 
@@ -178,7 +178,7 @@ Thanks for playing! 👋
 
 ## 🗺️ Roadmap
 
-The project has already completed the modular refactor and the core gameplay feature work that was previously tracked as issues. The currently active roadmap items are the enhancements still planned below:
+The project has already completed the modular refactor and the core gameplay feature work that was previously tracked as issues. The currently active roadmap items are the enhancements still plan[...]
 
 | Issue | Feature | Status |
 |-------|---------|--------|
@@ -186,7 +186,7 @@ The project has already completed the modular refactor and the core gameplay fea
 | [#2](https://github.com/BRO-BESTIE15/snake-water-gun/issues/2) | Play again prompt | Completed |
 | [#3](https://github.com/BRO-BESTIE15/snake-water-gun/issues/3) | Win percentage statistics | Completed |
 | [#10](https://github.com/BRO-BESTIE15/snake-water-gun/issues/10) | Separate game engine and CLI into modular files | Completed |
-| [#4](https://github.com/BRO-BESTIE15/snake-water-gun/issues/4) | Persistent game statistics using JSON | Open |
+| [#4](https://github.com/BRO-BESTIE15/snake-water-gun/issues/4) | Persistent game statistics using JSON | Completed |
 | [#5](https://github.com/BRO-BESTIE15/snake-water-gun/issues/5) | Main menu and match history | Open |
 | [#6](https://github.com/BRO-BESTIE15/snake-water-gun/issues/6) | Game settings (preferences file) | Open |
 | [#7](https://github.com/BRO-BESTIE15/snake-water-gun/issues/7) | Pygame graphical version | Open |
