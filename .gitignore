@@ -31,3 +31,6 @@ Thumbs.db
 
 # Game stats 
 stats.json
+
+# Game history
+history.json
